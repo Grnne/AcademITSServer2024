@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DllForSigning", "DllForSign
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppForSigning", "ConsoleAppForSigning\ConsoleAppForSigning.csproj", "{AA59704D-0DB3-45FA-8587-A8568685558E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildEvents", "BuildEvents\BuildEvents.csproj", "{4644D713-61E8-429B-AA42-A6EEEBF08572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildEvents", "BuildEvents\BuildEvents.csproj", "{4644D713-61E8-429B-AA42-A6EEEBF08572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConditionalCompilationTask", "ConditionalCompilationTask\ConditionalCompilationTask.csproj", "{B945ABB7-08B3-4048-B11B-2A207589809A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4644D713-61E8-429B-AA42-A6EEEBF08572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4644D713-61E8-429B-AA42-A6EEEBF08572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4644D713-61E8-429B-AA42-A6EEEBF08572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B945ABB7-08B3-4048-B11B-2A207589809A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B945ABB7-08B3-4048-B11B-2A207589809A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B945ABB7-08B3-4048-B11B-2A207589809A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B945ABB7-08B3-4048-B11B-2A207589809A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
