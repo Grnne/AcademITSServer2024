@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppForSigning", "Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildEvents", "BuildEvents\BuildEvents.csproj", "{4644D713-61E8-429B-AA42-A6EEEBF08572}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConditionalCompilationTask", "ConditionalCompilationTask\ConditionalCompilationTask.csproj", "{B945ABB7-08B3-4048-B11B-2A207589809A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConditionalCompilationTask", "ConditionalCompilationTask\ConditionalCompilationTask.csproj", "{B945ABB7-08B3-4048-B11B-2A207589809A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelTask", "ExcelTask\ExcelTask.csproj", "{25429D2E-6A6F-4788-8325-60602CD71564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelTask", "ExcelTask\ExcelTask.csproj", "{25429D2E-6A6F-4788-8325-60602CD71564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTask", "JsonTask\JsonTask.csproj", "{B0A838BE-8D3D-483D-A671-3B7E6A3B1847}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{25429D2E-6A6F-4788-8325-60602CD71564}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25429D2E-6A6F-4788-8325-60602CD71564}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25429D2E-6A6F-4788-8325-60602CD71564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A838BE-8D3D-483D-A671-3B7E6A3B1847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A838BE-8D3D-483D-A671-3B7E6A3B1847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A838BE-8D3D-483D-A671-3B7E6A3B1847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A838BE-8D3D-483D-A671-3B7E6A3B1847}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
