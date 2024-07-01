@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AcademITSOOP_feb_24\VectorTask\VectorTask.csproj" />
     <ProjectReference Include="..\UnitTestTask\FindPreviousSqrt.csproj" />
   </ItemGroup>
 
