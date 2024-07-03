@@ -5,7 +5,6 @@ internal class Program
     static void Main(string[] args)
     {
 #if DEBUG
-
         #region DebugPart
 
         Console.WriteLine("Debug mode");
