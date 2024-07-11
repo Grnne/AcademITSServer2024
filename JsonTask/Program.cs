@@ -30,7 +30,7 @@ public class Program
                     distinctCurrencies.TryAdd(currency.Name ?? string.Empty, 1); // TODO проверки на нулл, мб переделать через linq
                 }
             }
-
+             
             distinctCurrencies.Remove(string.Empty);
 
             Console.WriteLine("Список валют:"); // TODO спросить надо ли делать проверку на корректность, а то там [D] какой-то в жсоне

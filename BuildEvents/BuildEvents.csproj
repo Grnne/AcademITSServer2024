@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="mkdir d:\test\build_events&#xD;&#xA;xcopy /y /s &quot;.\bin\Debug\&quot; &quot;d:\test\build_events&quot;" />
+		<Exec Command="xcopy /y /s /i &quot;$(MSBuildProjectDirectory)&quot; &quot;d:\test\build_events\&quot;" />
 	</Target>
 
 </Project>
