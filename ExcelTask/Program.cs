@@ -37,6 +37,6 @@ internal class Program
             .SetBackgroundColor(XLColor.Gamboge);
 
         workSheet.Columns().AdjustToContents();
-        workbook.SaveAs("simple.xlsx");
+        workbook.SaveAs("persons.xlsx");
     }
 }
