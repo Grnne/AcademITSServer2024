@@ -1,5 +1,4 @@
-﻿using OfficeOpenXml;
-using OfficeOpenXml.Style;
+﻿using ClosedXML.Excel;
 
 namespace ExcelTask;
 
@@ -7,8 +6,6 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
-
         var persons = new List<Person>
         {
             new("Алексей", "Алексеев", 31, "89999999999"),
@@ -18,25 +15,28 @@ internal class Program
             new("Евгений", "Журов", 27, "89999999995")
         };
 
-        var outputFile = new FileInfo("persons.xlsx");
-        
-        if (outputFile.Exists)
-        {
-            outputFile.Delete();
-        }
+        using var workbook = new XLWorkbook();
+        var workSheet = workbook.Worksheets.Add("Persons");
 
-        using var excelPackage = new ExcelPackage(outputFile);
-        var workSheet = excelPackage.Workbook.Worksheets.Add("Persons");
-        workSheet.Cells[1, 1].Value = "FirstName";
-        workSheet.Cells[1, 2].Value = "LastName";
-        workSheet.Cells[1, 3].Value = "Age";
-        workSheet.Cells[1, 4].Value = "PhoneNumber";
-        
-        workSheet.Cells[2,1].LoadFromCollection(persons);
-        workSheet.Cells.AutoFitColumns();
-        var firstRow = workSheet.Row(1);
-        firstRow.Style.Fill.PatternType = ExcelFillStyle.LightGray;
-        firstRow.Style.Font.Bold = true;
-        excelPackage.Save();
+        workSheet.Cell(1, 1).Value = "First name";
+        workSheet.Cell(1, 2).Value = "Last name";
+        workSheet.Cell(1, 3).Value = "Age";
+        workSheet.Cell(1, 4).Value = "Phone number";
+
+        workSheet.Cell(2, 1).InsertData(persons);
+
+        workSheet.CellsUsed().Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+        var firstRowUsed = workSheet.Range("A1:D1");
+        firstRowUsed.Style
+            .Font.SetFontSize(12)
+            .Font.SetFontName("Arial")
+            .Font.SetBold();
+
+        firstRowUsed.Style.Fill
+            .SetBackgroundColor(XLColor.Gamboge);
+
+        workSheet.Columns().AdjustToContents();
+        workbook.SaveAs("simple.xlsx");
     }
 }
