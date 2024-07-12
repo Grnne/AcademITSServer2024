@@ -2,10 +2,9 @@
 
 public class Country
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
-    public int Population { get; set; }
+    public required int Population { get; set; }
 
-    public Currency[] Currencies { get; set; }
-
+    public required Currency[] Currencies { get; set; }
 }

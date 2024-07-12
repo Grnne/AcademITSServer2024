@@ -16,18 +16,18 @@ internal class Program
         };
 
         using var workbook = new XLWorkbook();
-        var workSheet = workbook.Worksheets.Add("Persons");
+        var worksheet = workbook.Worksheets.Add("Persons");
 
-        workSheet.Cell(1, 1).Value = "First name";
-        workSheet.Cell(1, 2).Value = "Last name";
-        workSheet.Cell(1, 3).Value = "Age";
-        workSheet.Cell(1, 4).Value = "Phone number";
+        worksheet.Cell(1, 1).Value = "First name";
+        worksheet.Cell(1, 2).Value = "Last name";
+        worksheet.Cell(1, 3).Value = "Age";
+        worksheet.Cell(1, 4).Value = "Phone number";
 
-        workSheet.Cell(2, 1).InsertData(persons);
+        worksheet.Cell(2, 1).InsertData(persons);
 
-        workSheet.CellsUsed().Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+        worksheet.CellsUsed().Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
 
-        var firstRowUsed = workSheet.Range("A1:D1");
+        var firstRowUsed = worksheet.Range("A1:D1");
         firstRowUsed.Style
             .Font.SetFontSize(12)
             .Font.SetFontName("Arial")
@@ -36,7 +36,7 @@ internal class Program
         firstRowUsed.Style.Fill
             .SetBackgroundColor(XLColor.Gamboge);
 
-        workSheet.Columns().AdjustToContents();
+        worksheet.Columns().AdjustToContents();
         workbook.SaveAs("persons.xlsx");
     }
 }

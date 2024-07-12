@@ -4,41 +4,52 @@ namespace JsonTask;
 
 public class Program
 {
-    static void Main(string[] args) // TODO спросить надо ли проверки на пустые файлы делать
+    static void Main(string[] args)
     {
-        var countriesString = File.ReadAllText("countries.json");
-
-        var countries = JsonConvert.DeserializeObject<List<Country>>(countriesString);
-
-        if (countries is null)
+        try
         {
-            Console.WriteLine("Стран нет");
-        }
-        else
-        {
-            var populationSum = countries.Sum(x => x.Population);
+            var countriesString = File.ReadAllText("countries.json");
 
-            Console.WriteLine($"Сумма населения стран: {populationSum}");
+            var countries = JsonConvert.DeserializeObject<List<Country>>(countriesString);
+
+            if (countries is null)
+            {
+                Console.WriteLine("Исходный файл пуст");
+
+                return;
+            }
+
+            var populationsSum = countries.Sum(x => x.Population);
+
+            Console.WriteLine($"Сумма населения стран: {populationsSum}");
             Console.WriteLine();
 
-            var distinctCurrencies = new Dictionary<string, int>();
+            var currencies = countries.SelectMany(x => x.Currencies)
+                .Where(x => x.Code is not null && x.Name is not null)
+                .DistinctBy(x => x.Name);
 
-            foreach (var country in countries)
+            Console.WriteLine("Список валют:");
+
+            foreach (var currency in currencies)
             {
-                foreach (var currency in country.Currencies)
-                {
-                    distinctCurrencies.TryAdd(currency.Name ?? string.Empty, 1); // TODO проверки на нулл, мб переделать через linq
-                }
+                Console.WriteLine(currency.Name);
             }
-             
-            distinctCurrencies.Remove(string.Empty);
-
-            Console.WriteLine("Список валют:"); // TODO спросить надо ли делать проверку на корректность, а то там [D] какой-то в жсоне
-
-            foreach (var distinctCurrency in distinctCurrencies)
-            {
-                Console.WriteLine(distinctCurrency.Key);
-            }
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        catch (JsonReaderException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        finally
+        {
+            Console.ReadKey();
         }
     }
 }
