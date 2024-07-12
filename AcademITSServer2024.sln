@@ -25,11 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindPreviousSqrt", "UnitTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTask", "TestTask\TestTask.csproj", "{A2AE6F18-1876-4389-8445-843A574573AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTask", "..\AcademITSOOP_feb_24\VectorTask\VectorTask.csproj", "{C2469E2A-8E63-4A91-B6DF-32ADE296E33D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdoNetTask", "AdoNetTask\AdoNetTask.csproj", "{10200494-EE19-4056-810E-0EA4D1350347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdoNetTransactionTask", "AdoNetTransactionTask\AdoNetTransactionTask.csproj", "{CB6D09D8-0FA5-4C2C-8589-DD7106E5E3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdoNetTransactionTask", "AdoNetTransactionTask\AdoNetTransactionTask.csproj", "{CB6D09D8-0FA5-4C2C-8589-DD7106E5E3F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorTask", "VectorTask\VectorTask.csproj", "{DE6CCFC7-9197-4907-8318-8A36AC041095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,10 +81,6 @@ Global
 		{A2AE6F18-1876-4389-8445-843A574573AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2AE6F18-1876-4389-8445-843A574573AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2AE6F18-1876-4389-8445-843A574573AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2469E2A-8E63-4A91-B6DF-32ADE296E33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2469E2A-8E63-4A91-B6DF-32ADE296E33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2469E2A-8E63-4A91-B6DF-32ADE296E33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2469E2A-8E63-4A91-B6DF-32ADE296E33D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10200494-EE19-4056-810E-0EA4D1350347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10200494-EE19-4056-810E-0EA4D1350347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10200494-EE19-4056-810E-0EA4D1350347}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +89,10 @@ Global
 		{CB6D09D8-0FA5-4C2C-8589-DD7106E5E3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB6D09D8-0FA5-4C2C-8589-DD7106E5E3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB6D09D8-0FA5-4C2C-8589-DD7106E5E3F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE6CCFC7-9197-4907-8318-8A36AC041095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE6CCFC7-9197-4907-8318-8A36AC041095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE6CCFC7-9197-4907-8318-8A36AC041095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE6CCFC7-9197-4907-8318-8A36AC041095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
