@@ -7,8 +7,6 @@ internal class Program
 {
     private const string ConnectionString = @"Data Source=(localdb)\Local;Initial Catalog=TestShop;Integrated Security=true;";
 
-    // TODO возможно все запросы стоит разбить по строкам, через """, но они достаточно короткие и так
-
     private static void Main(string[] args)
     {
         using var connection = new SqlConnection(ConnectionString);
@@ -17,18 +15,17 @@ internal class Program
         Console.WriteLine("Количество товаров: " + GetProductsCount(connection));
 
         Console.WriteLine("Распечатаем список товаров с помощью SqlReader:");
-        PrintProductsListReader(connection);
+        PrintProductsListUsingReader(connection);
 
         Console.WriteLine("Добавим новую категорию и товар, отобразим список с помощью SqlAdapter:");
         InsertCategory(connection, "Шляпы");
-        InsertProduct(connection, "PHP", 5);
-        PrintProductsListSqlAdapter(connection);
-
+        InsertProduct(connection, "PHP", 500, 5);
+        PrintProductsListUsingSqlAdapter(connection);
 
         Console.WriteLine("Удалим первый товар и поменяем имя второму, отобразим список:");
         UpdateProduct(connection, "Кляча", 2);
         DeleteProduct(connection, 1);
-        PrintProductsListSqlAdapter(connection);
+        PrintProductsListUsingSqlAdapter(connection);
     }
 
     private static int GetProductsCount(SqlConnection connection)
@@ -51,14 +48,15 @@ internal class Program
         command.ExecuteNonQuery();
     }
 
-    private static void InsertProduct(SqlConnection connection, string productName, int productCategory)
+    private static void InsertProduct(SqlConnection connection, string productName, decimal productPrice, int productCategoryId)
     {
-        const string query = "INSERT INTO Product VALUES (@productName, @productCategory)";
+        const string query = "INSERT INTO Product VALUES (@productName, @productPrice, @productCategoryId)";
 
         using var command = new SqlCommand(query, connection);
 
         command.Parameters.Add(new SqlParameter("@productName", productName) { SqlDbType = SqlDbType.NVarChar });
-        command.Parameters.Add(new SqlParameter("@productCategory", productCategory) { SqlDbType = SqlDbType.Int });
+        command.Parameters.Add(new SqlParameter("@productPrice", productPrice) { SqlDbType = SqlDbType.Decimal });
+        command.Parameters.Add(new SqlParameter("@productCategoryId", productCategoryId) { SqlDbType = SqlDbType.Int });
 
         command.ExecuteNonQuery();
     }
@@ -77,7 +75,7 @@ internal class Program
 
     private static void DeleteProduct(SqlConnection connection, int productId)
     {
-        const string query = "DELETE Product WHERE Id = @productId";
+        const string query = "DELETE FROM Product WHERE Id = @productId";
 
         using var command = new SqlCommand(query, connection);
 
@@ -86,9 +84,14 @@ internal class Program
         command.ExecuteNonQuery();
     }
 
-    private static void PrintProductsListReader(SqlConnection connection)
+    private static void PrintProductsListUsingReader(SqlConnection connection)
     {
-        const string query = "SELECT p.Name Product, c.Name Category FROM Product p INNER JOIN Category c ON p.categoryId = c.Id;";
+        const string query = """
+                             SELECT p.Name Product, p.Price, c.Name Category
+                             FROM Product p
+                             INNER JOIN Category c
+                             ON p.categoryId = c.Id;
+                             """;
 
         using var command = new SqlCommand(query, connection);
 
@@ -96,15 +99,20 @@ internal class Program
 
         while (reader.Read())
         {
-            Console.WriteLine($"Категория: {(string)reader["Category"]} Продукт: {(string)reader["Product"]}");
+            Console.WriteLine($"Категория: {(string)reader["Category"]} Продукт: {(string)reader["Product"]} Цена: {reader["Price"]}");
         }
 
         reader.Close();
     }
 
-    private static void PrintProductsListSqlAdapter(SqlConnection connection)
+    private static void PrintProductsListUsingSqlAdapter(SqlConnection connection)
     {
-        const string query = "SELECT p.Name Product, c.Name Category FROM Product p INNER JOIN Category c ON p.categoryId = c.Id;";
+        const string query = """
+                             SELECT p.Name Product, p.Price, c.Name Category
+                             FROM Product p
+                             INNER JOIN Category c
+                             ON p.categoryId = c.Id;
+                             """;
 
         using var adapter = new SqlDataAdapter(query, connection);
         var dataSet = new DataSet();
@@ -115,7 +123,7 @@ internal class Program
         foreach (DataRow row in dataTable.Rows)
         {
             var cells = row.ItemArray;
-            Console.WriteLine($"Категория: {cells[1]} Продукт: {cells[0]}");
+            Console.WriteLine($"Категория: {cells[2]} Продукт: {cells[0]} Цена: {cells[1]}");
         }
     }
 }
