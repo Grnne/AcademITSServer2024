@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShopEFTask.Model;
+using MigrationEFTask.Model;
 
-namespace ShopEFTask.Data;
+namespace MigrationEFTask.Data;
 
 public class ShopEfDbContext : DbContext
 {
-    private const string ConnectionString = @"Addr=SEREGA\Grnne;Database=ShopEf;Integrated Security=true;TrustServerCertificate=True;";
+    private const string ConnectionString = @"Addr=SEREGA\Grnne;Database=MigrationEf;Integrated Security=true;TrustServerCertificate=True;";
 
     public DbSet<Category> Category { get; set; } = null!;
 
