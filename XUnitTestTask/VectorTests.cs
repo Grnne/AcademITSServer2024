@@ -2,10 +2,10 @@ using VectorTask;
 
 namespace XUnitTestTask;
 
-public class XUnitTestTask
+public class VectorTests
 {
     [Fact]
-    public void Reverse_Vector_ReversingVector()
+    public void Reverse_ReversingVector()
     {
         var vector = new Vector([0, 0, 0, 1, 3]);
         var expected = new Vector([-0, -0, -0, -1, -3]);
@@ -16,7 +16,7 @@ public class XUnitTestTask
     }
 
     [Fact]
-    public void GetDifference_Vectors_ReturnsVectorsDifference()
+    public void GetDifference_ReturnsVectorsDifference()
     {
         var vector1 = new Vector([0, 0, 0, 1, 3]);
         var vector2 = new Vector([1, 1, 1, 1, 1, 1, 1]);
