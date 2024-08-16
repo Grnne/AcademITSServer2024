@@ -9,17 +9,24 @@ internal class Program
 
     static void Main(string[] args)
     {
-        using var connection = new SqlConnection(ConnectionString);
+        try
+        {
+            MakeQueryErrorWithTransaction(ConnectionString, "лопаты");
+
+            MakeQueryErrorWithoutTransaction(ConnectionString, "ошибки");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    private static void MakeQueryErrorWithTransaction(string connectionString, string categoryName)
+    {
+        using var connection = new SqlConnection(connectionString);
         connection.Open();
         var transaction = connection.BeginTransaction();
 
-        MakeQueryErrorWithTransaction(connection, "лопаты", transaction);
-
-        MakeQueryErrorWithoutTransaction(connection, "ошибки");
-    }
-
-    private static void MakeQueryErrorWithTransaction(SqlConnection connection, string categoryName, SqlTransaction transaction)
-    {
         try
         {
             const string query = "INSERT INTO Category VALUES (@categoryName)";
@@ -33,31 +40,25 @@ internal class Program
 
             transaction.Commit();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             transaction.Rollback();
 
-            Console.WriteLine(e.Message);
+            throw;
         }
     }
 
-    private static void MakeQueryErrorWithoutTransaction(SqlConnection connection, string categoryName)
+    private static void MakeQueryErrorWithoutTransaction(string connectionString, string categoryName)
     {
-        try
-        {
-            const string query = "INSERT INTO Category VALUES (@categoryName)";
-            using var command = new SqlCommand(query, connection);
+        using var connection = new SqlConnection(connectionString);
+        connection.Open();
 
-            command.Parameters.Add(new SqlParameter("@categoryName", categoryName) { SqlDbType = SqlDbType.NVarChar });
-            command.ExecuteNonQuery();
+        const string query = "INSERT INTO Category VALUES (@categoryName)";
+        using var command = new SqlCommand(query, connection);
 
-            throw new Exception("Тестовая ошибка без транзакции");
+        command.Parameters.Add(new SqlParameter("@categoryName", categoryName) { SqlDbType = SqlDbType.NVarChar });
+        command.ExecuteNonQuery();
 
-        }
-        catch (Exception e)
-        {
-
-            Console.WriteLine(e.Message);
-        }
+        throw new Exception("Тестовая ошибка без транзакции");
     }
 }
