@@ -5,7 +5,7 @@ namespace AdoNetTask;
 
 internal class Program
 {
-    private const string ConnectionString = @"Data Source=(localdb)\Local;Initial Catalog=TestShop;Integrated Security=true;";
+    private const string ConnectionString = @"Addr=SEREGA\Grnne;Database=TestShop;Integrated Security=true;TrustServerCertificate=True;";
 
     private static void Main(string[] args)
     {
