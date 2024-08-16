@@ -90,7 +90,7 @@ internal class Program
                              SELECT p.Name Product, p.Price, c.Name Category
                              FROM Product p
                              INNER JOIN Category c
-                             ON p.categoryId = c.Id;
+                                ON p.categoryId = c.Id;
                              """;
 
         using var command = new SqlCommand(query, connection);
@@ -111,7 +111,7 @@ internal class Program
                              SELECT p.Name Product, p.Price, c.Name Category
                              FROM Product p
                              INNER JOIN Category c
-                             ON p.categoryId = c.Id;
+                                ON p.categoryId = c.Id;
                              """;
 
         using var adapter = new SqlDataAdapter(query, connection);

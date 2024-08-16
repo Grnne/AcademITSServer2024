@@ -13,7 +13,7 @@ GO
 
 CREATE TABLE [dbo].[Category]
 (
-	[Id] INT IDENTITY(1,1) PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL
 );
 
@@ -22,9 +22,9 @@ VALUES (N'Fish'), (N'Meat'), (N'Dairy'), (N'Poultry');
 
 CREATE TABLE [dbo].[Product]
 (
-	[Id] INT IDENTITY(1,1) PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) PRIMARY KEY,
     [Name] NVARCHAR(255) NOT NULL,
-	[Price] DECIMAL NOT NULL,
+	[Price] DECIMAL(18, 2) NOT NULL,
 	[CategoryId] INT REFERENCES [dbo].[Category]([Id])
 );
 
