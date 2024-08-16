@@ -8,7 +8,7 @@ public class Program
     {
         try
         {
-            var countriesString = File.ReadAllText("countries.json");
+            var countriesString = File.ReadAllText("../../../countries.json");
 
             var countries = JsonConvert.DeserializeObject<List<Country>>(countriesString);
 
@@ -26,13 +26,13 @@ public class Program
 
             var currencies = countries.SelectMany(x => x.Currencies)
                 .Where(x => x.Code is not null && x.Name is not null)
-                .DistinctBy(x => x.Name);
+                .DistinctBy(x => x.Code);
 
             Console.WriteLine("Список валют:");
 
             foreach (var currency in currencies)
             {
-                Console.WriteLine(currency.Name);
+                Console.WriteLine($"Название валюты: {currency.Name}; Код валюты: {currency.Code}");
             }
         }
         catch (FileNotFoundException e)
