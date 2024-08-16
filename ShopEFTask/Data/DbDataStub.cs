@@ -87,6 +87,7 @@ public class DbDataStub
             Orders.Add(new Order()
             {
                 OrderDate = DateTime.Now,
+                Amount = rnd.Next(1, 50),
                 BuyerId = rnd.Next(1, 5),
                 Products = [Products[0], Products[rnd.Next(2, 5)]]
             });

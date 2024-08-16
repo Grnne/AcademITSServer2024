@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShopEFTask.Data;
-using ShopEFTask.Model;
+﻿using ShopEFTask.Data;
 
 namespace ShopEFTask;
 
@@ -50,9 +48,9 @@ internal class Program
         Console.WriteLine("Отобразим количество потраченных покупателями денег");
         var buyersExpenses = GetBuyersExpenses(db);
 
-        foreach (var buyersExpense in buyersExpenses)
+        foreach (var pair in buyersExpenses)
         {
-            Console.WriteLine($"{buyersExpense.Key.FirstName} {buyersExpense.Key.MiddleName ?? ""} {buyersExpense.Key.LastName} {buyersExpense.Value}");
+            Console.WriteLine($"{pair.Key} {pair.Value}");
         }
 
         Console.WriteLine();
@@ -68,37 +66,58 @@ internal class Program
 
     public static string? GetMostFrequentlyPurchasedProduct(ShopEfDbContext db)
     {
-        var result = db.Order.Include(o => o.Products)
-            .SelectMany(o => o.Products)
-            .GroupBy(p => new { p.Id, p.Name }) //Сомневаюсь, что корректно, но иначе надо делать второй запрос и выбирать по полученному id
-            .Select(g => new { g.Key.Name, Count = g.Count() })
-            .OrderByDescending(x => x.Count)
+        var result = db.Order
+            .SelectMany(o => o.Products.Select(p => new { Product = p, OrderAmount = o.Amount }))
+            .GroupBy(x => new { x.Product.Id, x.Product.Name })
+            .Select(g => new
+            {
+                g.Key.Name,
+                Count = g.Count(),
+                TotalAmount = g.Sum(x => x.OrderAmount)
+            })
+            .OrderByDescending(x => x.Count * x.TotalAmount)
             .FirstOrDefault();
 
         return result?.Name;
     }
 
-    public static Dictionary<Buyer, decimal> GetBuyersExpenses(ShopEfDbContext db)
+    public static Dictionary<string, decimal> GetBuyersExpenses(ShopEfDbContext db)
     {
-        var result = db.Order.Include(o => o.Buyer)
-            .Include(o => o.Products)
-            .GroupBy(o => o.Buyer)
-            .Select(g => new { BuyerName = g.Key, Expanses = g.SelectMany(o => o.Products).Sum(p => p.Price) })
-            .ToDictionary(key => key.BuyerName, value => value.Expanses);
+        var result = db.Buyer
+            .SelectMany(b => b.Orders.SelectMany(o => o.Products
+                .Select(p => new
+                {
+                    BuyerId = b.Id,
+                    b.FirstName,
+                    b.MiddleName,
+                    b.LastName,
+                    ProductAmount = o.Amount,
+                    ProductPrice = p.Price,
+                })
+            ))
+            .GroupBy(s => s.BuyerId)
+            .ToDictionary(
+                g => // Как это отформатировать?
+                    $"{g.FirstOrDefault()!.FirstName} {(string.IsNullOrEmpty(g.FirstOrDefault()!.MiddleName) ? "" : g.FirstOrDefault()!.MiddleName + " ")}{g.FirstOrDefault()!.LastName}",
+                g => g.Sum(x => x.ProductPrice * x.ProductAmount)
+            );
 
         return result;
     }
 
     public static Dictionary<string, int> GetProductsAmountByCategory(ShopEfDbContext db)
     {
-        var result = db.Category.Include(c => c.Products)
-            .ThenInclude(c => c.Orders)
-            .Select(c => new
-            {
-                c.Name,
-                Amount = c.Products.SelectMany(p => p.Orders).Count()
-            })
-            .ToDictionary(key => key.Name, value => value.Amount);
+        var result = db.Order
+            .SelectMany(o => o.Products.SelectMany(p => p.Categories
+                .Select(c => new
+                {
+                    OrderAmount = o.Amount,
+                    CategoryName = c.Name
+                })))
+            .GroupBy(c => c.CategoryName)
+            .ToDictionary(g =>
+                g.Key, g =>
+                g.Sum(c => c.OrderAmount));
 
         return result;
     }
