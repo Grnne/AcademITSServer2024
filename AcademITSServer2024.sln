@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestTask", "XUnitTestT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationEFTask", "MigrationEFTask\MigrationEFTask.csproj", "{FD184A4E-4C7F-4C2D-B335-763CDDB556FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWork", "UnitOfWork\UnitOfWork.csproj", "{C64087A3-1FAB-4635-BF76-7E26AE6F09B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{FD184A4E-4C7F-4C2D-B335-763CDDB556FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD184A4E-4C7F-4C2D-B335-763CDDB556FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD184A4E-4C7F-4C2D-B335-763CDDB556FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C64087A3-1FAB-4635-BF76-7E26AE6F09B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C64087A3-1FAB-4635-BF76-7E26AE6F09B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C64087A3-1FAB-4635-BF76-7E26AE6F09B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C64087A3-1FAB-4635-BF76-7E26AE6F09B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
